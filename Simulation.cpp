@@ -20,6 +20,7 @@
 #define RESET_GLUCOSE_BAL "RESET_GLUCOSE"
 #define RESET_INSULINE_BAL "RESET_INSULINE"
 
+
 #define Ki 1.36;
 #define Kg 1.6;
 
@@ -29,6 +30,7 @@
 #define ONE_DAY 60 * ONE_HOUR
 
 #define INJ 1
+#define RESET_INTERVAL ONE_MINUTE 
 
 typedef struct{
 	int start;
@@ -162,6 +164,9 @@ void *pompeGlucose(void *arg){
 	}
 }
 
+/**
+ * Le controlleur envoit a inteval regulier des messages dans les 2 BALs de gestion insuline et glucose
+ */
 void *controleur(void *arg){
 	double niveauGlycemieLocal;
 
@@ -215,23 +220,23 @@ void *controleAntibiotique(void *arg){
 }
 
 
-// void *controleurSeringue(void *arg){
+void *controleurSeringue(void *arg){
 	
-// 	while(1){
-// 		usleep(ONE_SECOND);
-// 		//Gestion de l'ampoule de glucose
-// 		pthread_mutex_lock(&glucoseLock);
-// 		if(txGlucose<INJ)
-// 			txGlucose=100;
-// 		pthread_mutex_unlock(&glucoseLock);
+	while(1){
+		usleep(RESET_INTERVAL);
+		//Gestion de l'ampoule de glucose
+		pthread_mutex_lock(&glucoseLock);
+		if(txGlucose<INJ)
+			txGlucose=100;
+		pthread_mutex_unlock(&glucoseLock);
 		
-// 		//Gestion de l'ampoule d'insuline
-// 		pthread_mutex_lock(&insulineLock);
-// 		if(txInsuline<INJ)
-// 			txInsuline = 100;
-// 		pthread_mutex_unlock(&insulineLock);
-// 	}	
-// }
+		//Gestion de l'ampoule d'insuline
+		pthread_mutex_lock(&insulineLock);
+		if(txInsuline<INJ)
+			txInsuline = 100;
+		pthread_mutex_unlock(&insulineLock);
+	}	
+}
 
 void cleanUp(void){
 
@@ -300,9 +305,9 @@ void run(void){
 	mySchedParam.sched_priority = HIGH;
 	pthread_attr_setschedparam(&attrib, &mySchedParam);
 	pthread_create(&controleAntibiotiqueThread,&attrib, controleAntibiotique,NULL);
-	//mySchedParam.sched_priority = LOW;
-	//pthread_attr_setschedparam(&attrib, &mySchedParam);
-	//pthread_create(&controleurSeringueThread,&attrib, controleurSeringue,NULL);
+	mySchedParam.sched_priority = LOW;
+	pthread_attr_setschedparam(&attrib, &mySchedParam);
+	pthread_create(&controleurSeringueThread,&attrib, controleurSeringue,NULL);
 }
 
 
