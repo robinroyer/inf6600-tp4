@@ -24,12 +24,13 @@
 #define Ki 1.36;
 #define Kg 1.6;
 
-#define ONE_SECOND 1
+#define MICRO_SECOND 1
+#define ONE_SECOND 1000000 * MICRO_SECOND
 #define ONE_MINUTE 60 * ONE_SECOND
 #define ONE_HOUR 60 * ONE_MINUTE
-#define ONE_DAY 60 * ONE_HOUR
+#define ONE_DAY 24 * ONE_HOUR
 
-#define INJ 1
+#define ANTIBIOTIC_PERIOD 4 * ONE_HOUR
 #define RESET_INTERVAL ONE_MINUTE 
 
 typedef struct{
@@ -58,30 +59,40 @@ bool solution2IsRunning = false;
 bool solutionGlucoseIsRunning = false;
 
 
+
 /*
- *   =>
+ *   Handle all the application display
  */
 void display(char * msg){
 	std::cout << msg << std::endl;	
 }
 
 
-
+/*
+ *   =>
+ */
 void *patient(void *arg){
 	message messageInsuline;
 	message messageGlucose;
-
+	double tmp;
 	while(1){
 		usleep(ONE_SECOND);
+		// get insuline and glucose
 		mq_receive(insulineQueue, (char *)&messageInsuline, sizeof(messageInsuline), NULL);
 		mq_receive(glucoseQueue, (char *)&messageGlucose, sizeof(messageGlucose), NULL);
 		
+		tmp = (double)messageInsuline.start * Ki - (double)messageGlucose.start * Kg
+
 		pthread_mutex_lock(&glycemieLock);
-		//glycemie = glycemie-( (double)messageInsuline.start * Ki * INJ - (double)messageGlucose.start * Kg * INJ);
+		glycemie = glycemie - tmp;
 		pthread_mutex_unlock(&glycemieLock);
+		display("Info : La glycemie vaut : " );
 	}
 }
 
+/*
+ *   =>
+ */
 void *pompeInsuline(void *arg){
 	message messageOut;
 	message messageIn;
@@ -90,39 +101,47 @@ void *pompeInsuline(void *arg){
 		usleep(ONE_SECOND);
 		mq_receive(injectionInsulineQueue, (char *)&messageIn, sizeof(messageIn), NULL);
 
-		if (txInsuline > 1){
-			if (messageIn.start){
-				messageOut.start = 1;
-				pthread_mutex_lock(&insulineLock);
-				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				txInsuline = txInsuline - INJ;
-				pthread_mutex_unlock(&insulineLock);
-				display"INFO : injection insuline");
-			}
-			else{
+
+		// TODO : protect with mutex
+		if (solution1IsRunning || solution2IsRunning){
+			pthread_mutex_lock(&insulineLock);
+			txInsuline--;
+			pthread_mutex_unlock(&insulineLock);
+
+			// testing volume to alert
+			if (txInsuline <= 1){				
 				messageOut.start = 0;
-				pthread_mutex_lock(&insulineLock);
 				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				txInsuline = txInsuline;
-				pthread_mutex_unlock(&insulineLock);
-				display("INFO : arret injection insuline");
+				display("ALERT : arret injection d'insuline => 1%");
+				//  TODO handle the 2 seringue
+
+			}else if(txInsuline <= 5){
+				display("ALERT : niveau d'insuline bas => 5%");				
+			} else{
+				// => working fine
 			}
 
-			if(txInsuline <= 5){
-				display("ALERT : niveau d'insuline bas => 5%");
+			// asking to stop
+			if (!messageIn.start){
+				messageOut.start = 0;
+				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
+				display("INFO : stop injection insuline");
+				
 			}
-		}
-		else{
-			messageOut.start = 0;
-			pthread_mutex_lock(&insulineLock);
-			mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-			txInsuline = txInsuline;
-			pthread_mutex_unlock(&insulineLock);
-			display("ALERT : arret injection d'insuline => 1%");
+		} else {
+			if (messageIn.start){
+				messageOut.start = 1;
+				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
+				display("INFO : begin injection insuline");
+			}
+
 		}
 	}
 }
 
+/*
+ *   =>
+ */
 void *pompeGlucose(void *arg){
 	message messageOut;
 	message messageIN;
@@ -136,7 +155,7 @@ void *pompeGlucose(void *arg){
 				messageOut.start = 1;
 				pthread_mutex_lock(&glucoseLock);
 				mq_send(glucoseQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				txGlucose = txGlucose - INJ;
+				txGlucose = txGlucose - 1;
 				pthread_mutex_unlock(&glucoseLock);
 				display("Injection de glucose : start");
 			}
@@ -200,7 +219,9 @@ void *controleur(void *arg){
 }
 
 
-
+/*
+ * Injection handler
+ */
 void *controleAntibiotique(void *arg){
 	int i=0;
 	while (1){
@@ -208,36 +229,39 @@ void *controleAntibiotique(void *arg){
 			display("Info : injection anticoagulant");
 			usleep(3 * ONE_MINUTE);
 			display("Info : arret injection anticoagulant apres 3 minutes" );
-			display("Info : arret injection antibiotique");
 		}
 			display("Info : injection antibiotique");
 			usleep(ONE_MINUTE);
 			display("Info : arret injection antibiotique");
-		
 		i++;
-		usleep(4 * ONE_HOUR);
+		usleep(ANTIBIOTIC_PERIOD);
 	}
 }
 
 
+/*
+ * TODO 
+ */
 void *controleurSeringue(void *arg){
 	
 	while(1){
 		usleep(RESET_INTERVAL);
-		//Gestion de l'ampoule de glucose
 		pthread_mutex_lock(&glucoseLock);
-		if(txGlucose<INJ)
+		if(txGlucose<1)
 			txGlucose=100;
 		pthread_mutex_unlock(&glucoseLock);
 		
-		//Gestion de l'ampoule d'insuline
 		pthread_mutex_lock(&insulineLock);
-		if(txInsuline<INJ)
+		if(txInsuline<1)
 			txInsuline = 100;
 		pthread_mutex_unlock(&insulineLock);
 	}	
 }
 
+
+/*
+ *   =>
+ */
 void cleanUp(void){
 
 	// CLEAN UP
@@ -265,6 +289,9 @@ void cleanUp(void){
 }
 
 
+/*
+ *   =>
+ */
 void run(void){
 	pthread_attr_t attrib;
 	setprio(0,20);
@@ -311,7 +338,9 @@ void run(void){
 }
 
 
-
+/*
+ *   =>
+ */
 int main(int argc, char *argv[]) {
 	run();
 	cleanUp();
