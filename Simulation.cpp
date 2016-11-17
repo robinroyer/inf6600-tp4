@@ -45,18 +45,18 @@ mqd_t glucoseQueue, insulineQueue, injectionInsulineQueue, injectionGlucoseQueue
 pthread_mutex_t  glycemieLock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t  insulineLock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t  glucoseLock = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t  solution1IsRunningLock = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t  solution2IsRunningLock = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t  solutionGlucoseIsRunningLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t  glucoseIsRunningLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t  insulineIsRunningLock = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t  isResetLock = PTHREAD_MUTEX_INITIALIZER;
 
 // Definition de la memoire partagee
 double glycemie = 60;
 double txInsuline = 100;
 double txGlucose = 100;
 
-bool solution1IsRunning = true;
-bool solution2IsRunning = false;
-bool solutionGlucoseIsRunning = false;
+bool glucoseIsRunning = true;
+bool insulineIsRunning  = false;
+bool isReset = false;
 
 
 
@@ -67,11 +67,17 @@ void display(char * msg){
 	std::cout << msg << std::endl;	
 }
 
+void printValue(char * msg, double value){
+	std::cout << msg <<  value << std::endl;	
+}
+
 
 /*
  *   =>
  */
 void *patient(void *arg){
+	// todo previous msg
+
 	message messageInsuline;
 	message messageGlucose;
 	double tmp;
@@ -86,12 +92,12 @@ void *patient(void *arg){
 		pthread_mutex_lock(&glycemieLock);
 		glycemie = glycemie - tmp;
 		pthread_mutex_unlock(&glycemieLock);
-		display("Info : La glycemie vaut : " );
+		printValue("Info : La glycemie vaut : ", glycemie);
 	}
 }
 
 /*
- *   =>
+ *   => almost good
  */
 void *pompeInsuline(void *arg){
 	message messageOut;
@@ -103,17 +109,25 @@ void *pompeInsuline(void *arg){
 
 
 		// TODO : protect with mutex
-		if (solution1IsRunning || solution2IsRunning){
+		if (insulineIsRunning){
+			messageOut.start = 1;
+
 			pthread_mutex_lock(&insulineLock);
 			txInsuline--;
 			pthread_mutex_unlock(&insulineLock);
 
 			// testing volume to alert
 			if (txInsuline <= 1){				
-				messageOut.start = 0;
-				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				display("ALERT : arret injection d'insuline => 1%");
-				//  TODO handle the 2 seringue
+
+				if(isReset){
+					display("INFO : Changement de seringue d'insuline => 1%");
+				} else{
+					display("ALERT : arret injection d'insuline => 1%");
+					messageOut.start = 0;
+					pthread_mutex_lock(&isResetLock);
+					isReset = false;
+					pthread_mutex_unlock(&isResetLock);
+				}
 
 			}else if(txInsuline <= 5){
 				display("ALERT : niveau d'insuline bas => 5%");				
@@ -124,23 +138,25 @@ void *pompeInsuline(void *arg){
 			// asking to stop
 			if (!messageIn.start){
 				messageOut.start = 0;
-				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 				display("INFO : stop injection insuline");
 				
 			}
 		} else {
 			if (messageIn.start){
+				// asking to start
 				messageOut.start = 1;
-				mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 				display("INFO : begin injection insuline");
+			}else{
+				messageOut.start = 0;
 			}
 
 		}
 	}
+	mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 }
 
 /*
- *   =>
+ *   => TODO a la fin
  */
 void *pompeGlucose(void *arg){
 	message messageOut;
@@ -199,15 +215,18 @@ void *controleur(void *arg){
 		pthread_mutex_unlock(&glycemieLock);
 
 		if (niveauGlycemieLocal < 60){
+			display("ALERT : Le patient est en hypoglycemie!");
 			controle_Insuline.start = 0;
 			controle_Glucose.start = 1;
 		}
 		else{
 			if (niveauGlycemieLocal > 120){
+				display("ALERT : Le patient est a trop de sucre dans le sang!");
 				controle_Insuline.start = 1;
 				controle_Glucose.start = 0;
 			}
 			else{
+				display("Info : Le patient est en etat normal!");
 				controle_Insuline.start = 0;
 				controle_Glucose.start = 0;
 			}
