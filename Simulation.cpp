@@ -35,10 +35,9 @@
 
 typedef struct{
 	int start;
-	// int stop;
 } message;
 
-	pthread_t patientThread, pompeInsulineThread, pompeGlucoseThread, controleGlycemieThread, controleAntibiotiqueThread, controleurSeringueThread;
+	pthread_t patientThread, pompeInsulineThread, pompeGlucoseThread, controleGlycemieThread, controleAntibiotiqueThread, capteurThread;
 mqd_t glucoseQueue, insulineQueue, injectionInsulineQueue, injectionGlucoseQueue, resetGlucoseQueue, resetInsulineQueue;
 
 // In order to proctect var
@@ -50,7 +49,8 @@ pthread_mutex_t  insulineIsRunningLock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t  isResetLock = PTHREAD_MUTEX_INITIALIZER;
 
 // Definition de la memoire partagee
-double glycemie = 60;
+double glycemie = 200;
+
 double txInsuline = 100;
 double txGlucose = 100;
 
@@ -67,19 +67,23 @@ void display(char * msg){
 	std::cout << msg << std::endl;	
 }
 
+/*
+ *   Handle all the application display
+ */
 void printValue(char * msg, double value){
 	std::cout << msg <<  value << std::endl;	
 }
 
 
 /*
- *   =>
+ *  Patient evolution of glycemia
  */
 void *patient(void *arg){
 	// todo previous msg
 
 	message messageInsuline;
 	message messageGlucose;
+
 	double tmp;
 	while(1){
 		usleep(ONE_SECOND);
@@ -92,12 +96,13 @@ void *patient(void *arg){
 		pthread_mutex_lock(&glycemieLock);
 		glycemie = glycemie - tmp;
 		pthread_mutex_unlock(&glycemieLock);
+
 		printValue("Info : La glycemie vaut : ", glycemie);
 	}
 }
 
 /*
- *   => almost good
+ *   Insuline pump handler
  */
 void *pompeInsuline(void *arg){
 	message messageOut;
@@ -151,51 +156,53 @@ void *pompeInsuline(void *arg){
 			}
 
 		}
+		mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 	}
-	mq_send(insulineQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 }
 
 /*
- *   => TODO a la fin
+ *   Glucose pump handler
  */
 void *pompeGlucose(void *arg){
 	message messageOut;
-	message messageIN;
+	message messageIn;
 
 	while (1){
 		usleep(ONE_SECOND);
-		mq_receive(injectionGlucoseQueue, (char *)&messageIN, sizeof(messageIN), NULL);
+		mq_receive(injectionGlucoseQueue, (char *)&messageIn, sizeof(messageIn), NULL);
 
-		if (txGlucose > 1){
-			if (messageIN.start){
-				messageOut.start = 1;
-				pthread_mutex_lock(&glucoseLock);
-				mq_send(glucoseQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				txGlucose = txGlucose - 1;
-				pthread_mutex_unlock(&glucoseLock);
-				display("Injection de glucose : start");
-			}
-			else{
-				messageOut.start = 0;
-				pthread_mutex_lock(&glucoseLock);
-				mq_send(glucoseQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-				txGlucose = txGlucose;
-				pthread_mutex_unlock(&glucoseLock);				
-				display("Injection de glucose : stop");
-			}
-			if(txGlucose < 6){
-				display("ALERT : niveau d'insuline bas => 5%");
-			}
-		}
-		else{
-			messageOut.start = 0;
+		// TODO : protect with mutex
+		if (glucoseIsRunning){
+			messageOut.start = 1;
+
 			pthread_mutex_lock(&glucoseLock);
-			mq_send(glucoseQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
-			txGlucose = txGlucose;
+			txGlucose--;
 			pthread_mutex_unlock(&glucoseLock);
 
-			display("ALERT : arret injection de glucose => 1%");
+			// testing volume to alert
+			if (txGlucose <= 1){				
+				display("ALERT : arret injection de glucose => 1%");
+					messageOut.start = 0;		
+			} else{
+				// => working fine
+			}
+
+			// asking to stop
+			if (!messageIn.start){
+				messageOut.start = 0;
+				display("INFO : stop injection insuline");
+			}
+		} else {
+			if (messageIn.start){
+				// asking to start
+				messageOut.start = 1;
+				display("INFO : debut injection insuline");
+			}else{
+				messageOut.start = 0;
+			}
+
 		}
+		mq_send(glucoseQueue, (char *)&messageOut, sizeof(messageOut), NORMAL);
 	}
 }
 
@@ -233,7 +240,6 @@ void *controleur(void *arg){
 		}
 		mq_send(injectionGlucoseQueue, (char *)&controle_Glucose, sizeof(controle_Glucose), NORMAL);
 		mq_send(injectionInsulineQueue, (char *)&controle_Insuline, sizeof(controle_Insuline), NORMAL);
-
 	}
 }
 
@@ -244,7 +250,7 @@ void *controleur(void *arg){
 void *controleAntibiotique(void *arg){
 	int i=0;
 	while (1){
-		if(i%6==0){
+		if(i%6 == 0){
 			display("Info : injection anticoagulant");
 			usleep(3 * ONE_MINUTE);
 			display("Info : arret injection anticoagulant apres 3 minutes" );
@@ -259,74 +265,76 @@ void *controleAntibiotique(void *arg){
 
 
 /*
- * TODO 
+ * Filling ampoule
  */
 void *controleurSeringue(void *arg){
 	
 	while(1){
 		usleep(RESET_INTERVAL);
+
 		pthread_mutex_lock(&glucoseLock);
-		if(txGlucose<1)
-			txGlucose=100;
+		txGlucose=100;
 		pthread_mutex_unlock(&glucoseLock);
-		
-		pthread_mutex_lock(&insulineLock);
-		if(txInsuline<1)
-			txInsuline = 100;
-		pthread_mutex_unlock(&insulineLock);
+
+		pthread_mutex_lock(&isResetLock);
+		isReset = true;
+		pthread_mutex_unlock(&isResetLock);
 	}	
 }
 
 
 /*
- *   =>
+ *  Avoid memory leak
  */
 void cleanUp(void){
 
 	// CLEAN UP
 	pthread_join(pompeInsulineThread, NULL);
 	pthread_join(patientThread, NULL);
-	pthread_join(pompeGlucoseThread, NULL);
 	pthread_join(controleAntibiotiqueThread, NULL);
-	pthread_join(controleGlycemieThread, NULL);
+	pthread_join(pompeGlucoseThread, NULL);
 	pthread_join(patientThread, NULL);
-	pthread_join(controleurSeringueThread, NULL);
+	pthread_join(controleGlycemieThread, NULL);
+	pthread_join(capteurThread, NULL);
 	
 	mq_close(glucoseQueue);
-	mq_close(injectionInsulineQueue);
 	mq_close(resetGlucoseQueue);
+	mq_close(injectionInsulineQueue);
 	mq_close(insulineQueue);
-	mq_close(injectionGlucoseQueue);
 	mq_close(resetInsulineQueue);
+	mq_close(injectionGlucoseQueue);
 	
 	mq_unlink(GLUCOSE_BAL);
-	mq_unlink(INJECTION_GLUCOSE_BAL);
 	mq_unlink(RESET_GLUCOSE_BAL);
+	mq_unlink(INJECTION_GLUCOSE_BAL);
 	mq_unlink(INJECTION_INSULINE_BAL);
-	mq_unlink(RESET_INSULINE_BAL);
 	mq_unlink(INSULINE_BAL);
+	mq_unlink(RESET_INSULINE_BAL);
 }
 
 
 /*
- *   =>
+ *  Init struct memories and threads
  */
 void run(void){
+
+	//TODO handle signal and think about repetitive thread
+
 	pthread_attr_t attrib;
 	setprio(0,20);
 	struct sched_param mySchedParam;
-	struct mq_attr mqattr;
+	struct mq_attr queueAttribut;
 	
 	// BOITE AUX LETTRES
-	mqattr.mq_maxmsg = MAX_NUM_MSG;
-	mqattr.mq_msgsize = sizeof (message);
+	queueAttribut.mq_maxmsg = MAX_NUM_MSG;
+	queueAttribut.mq_msgsize = sizeof(message);
 	
-	glucoseQueue = mq_open(GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
-	insulineQueue = mq_open(INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
-	injectionInsulineQueue = mq_open(INJECTION_INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
-	injectionGlucoseQueue = mq_open(INJECTION_GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
-	resetInsulineQueue = mq_open(RESET_INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
-	resetGlucoseQueue = mq_open(RESET_GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &mqattr);
+	glucoseQueue = mq_open(GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
+	insulineQueue = mq_open(INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
+	injectionInsulineQueue = mq_open(INJECTION_INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
+	injectionGlucoseQueue = mq_open(INJECTION_GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
+	resetInsulineQueue = mq_open(RESET_INSULINE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
+	resetGlucoseQueue = mq_open(RESET_GLUCOSE_BAL, O_RDWR|O_CREAT, S_IRUSR|S_IWUSR, &queueAttribut);
 	
 	// set up
 	setprio(0, 20);
@@ -334,8 +342,7 @@ void run(void){
 	pthread_attr_setinheritsched(&attrib, PTHREAD_EXPLICIT_SCHED);
 	pthread_attr_setschedpolicy (&attrib, SCHED_FIFO);
 	
-	//  nos differetns threads
-	
+	//  Nos differentes threads
 	mySchedParam.sched_priority = NORMAL;
 	pthread_attr_setschedparam(&attrib, &mySchedParam);
 	pthread_create(&patientThread,&attrib, patient,NULL);
@@ -353,12 +360,12 @@ void run(void){
 	pthread_create(&controleAntibiotiqueThread,&attrib, controleAntibiotique,NULL);
 	mySchedParam.sched_priority = LOW;
 	pthread_attr_setschedparam(&attrib, &mySchedParam);
-	pthread_create(&controleurSeringueThread,&attrib, controleurSeringue,NULL);
+	pthread_create(&capteurThread,&attrib, controleurSeringue,NULL);
 }
 
 
 /*
- *   =>
+ *   main dude
  */
 int main(int argc, char *argv[]) {
 	run();
