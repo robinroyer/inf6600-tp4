@@ -1,0 +1,857 @@
+Info : injection anticoagulant
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 100
+INFO : debut injection insuline
+Info : La glycemie vaut : 21
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 22
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 99
+Info : La glycemie vaut : 23
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 98
+Info : La glycemie vaut : 24
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 97
+Info : La glycemie vaut : 25
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 96
+Info : La glycemie vaut : 26
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 95
+Info : La glycemie vaut : 27
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 94
+Info : La glycemie vaut : 28
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 93
+Info : La glycemie vaut : 29
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 92
+Info : La glycemie vaut : 30
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 91
+Info : La glycemie vaut : 31
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 90
+Info : La glycemie vaut : 32
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 89
+Info : La glycemie vaut : 33
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 88
+Info : La glycemie vaut : 34
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 87
+Info : La glycemie vaut : 35
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 86
+Info : La glycemie vaut : 36
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 85
+Info : La glycemie vaut : 37
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 84
+Info : La glycemie vaut : 38
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 83
+Info : La glycemie vaut : 39
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 82
+Info : La glycemie vaut : 40
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 81
+Info : La glycemie vaut : 41
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 80
+Info : La glycemie vaut : 42
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 79
+Info : La glycemie vaut : 43
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 78
+Info : La glycemie vaut : 44
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 77
+Info : La glycemie vaut : 45
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 76
+Info : La glycemie vaut : 46
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 75
+Info : La glycemie vaut : 47
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 74
+Info : La glycemie vaut : 48
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 73
+Info : La glycemie vaut : 49
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 72
+Info : La glycemie vaut : 50
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 71
+Info : La glycemie vaut : 51
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 70
+Info : La glycemie vaut : 52
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 69
+Info : La glycemie vaut : 53
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 68
+Info : La glycemie vaut : 54
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 67
+Info : La glycemie vaut : 55
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 66
+Info : La glycemie vaut : 56
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 65
+Info : La glycemie vaut : 57
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 64
+Info : La glycemie vaut : 58
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 63
+Info : La glycemie vaut : 59
+ALERT : Le patient est en hypoglycemie!
+insuline : 100
+glucose : 62
+Info : La glycemie vaut : 60
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 61
+Info : La glycemie vaut : 61
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 60
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 59
+INFO : stop injection insuline
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 58
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : arret injection anticoagulant apres 3 minutes
+Info : injection antibiotique
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
+Info : Le patient est en etat normal!
+insuline : 100
+glucose : 100
+Info : La glycemie vaut : 62
